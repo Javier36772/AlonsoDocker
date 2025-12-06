@@ -1,6 +1,6 @@
 # 🚀 Arquitectura de Microservicios con Docker Compose
 
-**Desarrollado por: Javier Alonso**
+Desarrollado por: Javier 
 
 Este proyecto implementa una arquitectura de microservicios utilizando Docker Compose, integrando un frontend web (React), una API REST (Node.js/Express) y una base de datos PostgreSQL con persistencia de datos.
 
