@@ -50,11 +50,12 @@ services:
       dockerfile: Dockerfile
     container_name: javier-frontend-app
     environment:
-      REACT_APP_API_URL: http://localhost:5000
+      REACT_APP_API_URL: http://alonso-backend-api:5000
     ports:
       - "3000:3000"
     depends_on:
-      - alonso-backend-api
+      alonso-backend-api:
+        condition: service_started
     networks:
       - javier_microservices_network
     restart: unless-stopped

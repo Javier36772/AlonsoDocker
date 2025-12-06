@@ -38,7 +38,8 @@ const initDatabase = async () => {
 // Endpoint con apellido que retorna nombre completo
 app.get('/api/alonso', (req, res) => {
   res.json({
-    nombreCompleto: 'Javier Alonso',
+    nombre_completo: 'Javier Alonso',
+    nombreCompleto: 'Javier Alonso', // Compatibilidad
     mensaje: 'Endpoint creado por Javier Alonso',
     timestamp: new Date().toISOString()
   });

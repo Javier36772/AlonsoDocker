@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// El proxy en setupProxy.js redirige las peticiones al backend usando el nombre del servicio
+// Cuando está en Docker, usa 'alonso-backend-api' (nombre del servicio en docker-compose)
+// Cuando está en desarrollo local, el proxy usa 'localhost:5000'
+// Por eso aquí usamos rutas relativas que serán redirigidas por el proxy
+const API_URL = '';
 
 function App() {
   const [usuarios, setUsuarios] = useState([]);
@@ -35,7 +39,8 @@ function App() {
   const cargarNombreCompleto = async () => {
     try {
       const response = await axios.get(`${API_URL}/api/alonso`);
-      setNombreCompleto(response.data.nombreCompleto);
+      // Soporta tanto nombre_completo como nombreCompleto
+      setNombreCompleto(response.data.nombre_completo || response.data.nombreCompleto);
     } catch (err) {
       console.error('Error al cargar nombre completo:', err);
     }
