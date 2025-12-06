@@ -369,10 +369,5 @@ Este proyecto es parte de un ejercicio académico/práctico.
 
 ## 🔗 URL del Repositorio GitHub
 
-**Nota**: Una vez que subas el proyecto a GitHub, actualiza esta sección con la URL de tu repositorio.
-
-Ejemplo:
-```
-https://github.com/tu-usuario/microservicios-docker-compose
-```
+**Repositorio**: [https://github.com/Javier36772/AlonsoDocker.git](https://github.com/Javier36772/AlonsoDocker.git)
 
