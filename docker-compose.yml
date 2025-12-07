@@ -6,11 +6,11 @@ services:
     image: postgres:15-alpine
     container_name: javier-postgres-db
     environment:
-      POSTGRES_USER: javier_user
-      POSTGRES_PASSWORD: javier_password_2024
-      POSTGRES_DB: javier_database
+      POSTGRES_USER: ${POSTGRES_USER:-javier_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-javier_password_2024}
+      POSTGRES_DB: ${POSTGRES_DB:-javier_database}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - javier_postgres_data:/var/lib/postgresql/data
     networks:
@@ -28,14 +28,14 @@ services:
       dockerfile: Dockerfile
     container_name: alonso-backend-api
     environment:
-      DB_HOST: javier-postgres-db
-      DB_PORT: 5432
-      DB_USER: javier_user
-      DB_PASSWORD: javier_password_2024
-      DB_NAME: javier_database
-      PORT: 5000
+      DB_HOST: ${DB_HOST:-javier-postgres-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER:-javier_user}
+      DB_PASSWORD: ${DB_PASSWORD:-javier_password_2024}
+      DB_NAME: ${DB_NAME:-javier_database}
+      PORT: ${BACKEND_PORT:-5000}
     ports:
-      - "5000:5000"
+      - "${BACKEND_PORT:-5000}:5000"
     depends_on:
       javier-postgres-db:
         condition: service_healthy
@@ -48,11 +48,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-http://alonso-backend-api:5000}
     container_name: javier-frontend-app
     environment:
-      REACT_APP_API_URL: http://alonso-backend-api:5000
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-http://alonso-backend-api:5000}
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT:-3000}:3000"
     depends_on:
       alonso-backend-api:
         condition: service_started
